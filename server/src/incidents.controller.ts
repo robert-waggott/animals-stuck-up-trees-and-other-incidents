@@ -4,10 +4,10 @@ import { Incident } from './interfaces/incident.interface';
 
 @Controller("Incidents")
 export class IncidentsController {
-    constructor(private readonly appService: IncidentsService) { }
+    constructor(private readonly incidentsService: IncidentsService) { }
 
     @Get()
     getIncidents(): Incident[] {
-        return this.appService.getHello();
+        return this.incidentsService.getIncidents();
     }
 }
