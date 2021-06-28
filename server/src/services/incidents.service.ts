@@ -48,6 +48,7 @@ export class IncidentsService extends BaseService {
                     coordinates: [incident.Longitude, incident.Latitude]
                 },
                 properties: {
+                    "id": incident.IncidentNumber,
                     "type": incident.Type
                 }
             })) 
