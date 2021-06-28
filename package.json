@@ -1,0 +1,20 @@
+{
+  "name": "animals-stuck-up-trees-and-others",
+  "version": "1.0.0",
+  "description": "This is an ongoing personal development task more than anything so I can keep my typescript, node/nestJS skills, and React skills up to date and current whilst working on work projects that sit outside of that ecosystem.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robert-waggott/animals-stuck-up-trees-and-other-incidents.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robert-waggott/animals-stuck-up-trees-and-other-incidents/issues"
+  },
+  "homepage": "https://github.com/robert-waggott/animals-stuck-up-trees-and-other-incidents#readme"
+}
