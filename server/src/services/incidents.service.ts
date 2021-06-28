@@ -13,7 +13,7 @@ export class IncidentsService extends BaseService {
     }
 
     getIncidents(): Incident[] {
-        const filename = join(__dirname, "../..", "data", "Animal Rescue incidents attended by LFB from Jan 2009 (1).csv");
+        const filename = join(__dirname, "../..", "data", "Animal Rescue incidents attended by LFB from Jan 2009.csv");
         const fileContents = readFileSync(filename, "utf-8");
 
         const data = parse(fileContents, {
