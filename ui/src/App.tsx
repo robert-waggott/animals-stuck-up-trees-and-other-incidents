@@ -18,9 +18,14 @@ function App() {
         fetchData();
     }, []);
 
+    const onPointClicked = (id: number) => {
+        console.log(id);
+        setSelectedIncidentNumber(id);
+    };
+
     return (
         <div className="App">
-            <Map IncidentsGeoJson={incidents} />
+            <Map incidentsGeoJson={incidents} onPointClicked={onPointClicked} />
         </div>
     );
 }

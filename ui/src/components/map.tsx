@@ -3,11 +3,13 @@ import maplibregl from "maplibre-gl";
 import { IncidentsFeatureCollection } from "../services/incidents-service";
 
 export interface MapProps {
-    IncidentsGeoJson?: IncidentsFeatureCollection
+    incidentsGeoJson?: IncidentsFeatureCollection;
+    onPointClicked: (id: number) => unknown;
 }
 
 export const Map = (props: MapProps) => {
     const mapRef = React.useRef() as MutableRefObject<HTMLDivElement>;
+    const incidentsGeoJson = props.incidentsGeoJson;
 
     React.useEffect(() => {
         const map = new maplibregl.Map({
@@ -18,7 +20,7 @@ export const Map = (props: MapProps) => {
         });
 
         map.on('load', () => {
-            if (!props.IncidentsGeoJson) {
+            if (!incidentsGeoJson) {
                 return;
             }
 
@@ -26,7 +28,7 @@ export const Map = (props: MapProps) => {
             // Heatmap layers also work with a vector tile source.
             map.addSource('incidents', {
                 'type': 'geojson',
-                'data': props.IncidentsGeoJson
+                'data': incidentsGeoJson
             });
 
             map.addLayer(
@@ -110,7 +112,7 @@ export const Map = (props: MapProps) => {
 
         map.on("click", "incidents-point", (ev) => {
             if (ev.features && ev.features.length > 0) {
-                console.log(ev.features[0]);
+                props.onPointClicked(ev.features[0].properties!.id);
             }
         });
 
@@ -121,7 +123,7 @@ export const Map = (props: MapProps) => {
         map.on('mouseleave', 'incidents-point', () => {
             map.getCanvas().style.cursor = '';
         });         
-    });
+    }, [incidentsGeoJson]);
 
     return (
         <>
