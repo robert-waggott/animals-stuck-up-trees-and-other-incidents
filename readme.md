@@ -23,5 +23,5 @@ The dataset can be found [here](https://data.london.gov.uk/dataset/animal-rescue
 
 ## Refactors
 
-- [ ] Refactor app -> info panel passing through of incidentNumber into a reducer in app? 
+- [x] Refactor app -> info panel passing through of incidentNumber into a reducer in app? 
 - [ ] Convert from Nest to Apollo? 
