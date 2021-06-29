@@ -11,6 +11,10 @@ export interface Incident {
     OriginOfCall: string;
     PropertyType: string;
     PropertyCategory: string;
+    Ward?: string;
+    Borough?: string;
+    Street?: string;
+    PostcodeDistrict?: string;
     Latitude: number | null;
     Longitude: number | null;
 }

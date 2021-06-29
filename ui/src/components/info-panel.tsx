@@ -1,10 +1,26 @@
 import React from "react";
+import { Incident } from "../interfaces/incident";
+import { IncidentsService } from "../services/incidents-service";
 
 export interface InfoPanelProps {
     incidentNumber: string | null;
 }
 
 export const InfoPanel = (props: InfoPanelProps) => {
+    const [incident, setIncident] = React.useState<Incident | null>(null);
+
+    React.useEffect(() => {
+        async function fetchData() {
+            if (props.incidentNumber) {
+                const fetchedData = await new IncidentsService().getIncident(props.incidentNumber);  
+                    
+                setIncident(fetchedData);
+            }
+        };
+
+        fetchData();
+    }, [props.incidentNumber]);
+
     return (
         <>
             <div style={{ 

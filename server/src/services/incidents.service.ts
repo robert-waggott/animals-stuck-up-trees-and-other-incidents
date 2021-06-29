@@ -22,17 +22,26 @@ export class IncidentsService extends BaseService {
             skip_empty_lines: true
         });
 
-        const incidents: Incident[] = data.map((raw: any) => ({
-            IncidentNumber: raw.IncidentNumber, 
-            DateTime: raw.DateTimeOfCall,
-            Type: raw.TypeOfIncident,
-            PumpCount: raw.PumpCount,
-            PumpHoursTotal: raw.PumpHoursTotal,
-            Description: raw.FinalDescription,
-            TypeOfAnumal: raw.AnimalGroupParent,
-            Latitude: this.getNullSafeString(raw.Latitude),
-            Longitude: this.getNullSafeString(raw.Longitude)
-        }));
+        const incidents: Incident[] = data.map((raw: any) => {
+            return {
+                IncidentNumber: raw.IncidentNumber, 
+                DateTime: raw.DateTimeOfCall,
+                Type: raw.TypeOfIncident,
+                PumpCount: raw.PumpCount,
+                PumpHours: raw.PumpHoursTotal,
+                Description: raw.FinalDescription, 
+                TypeOfAnimal: raw.AnimalGroupParent, 
+                OriginOfCall: raw.OriginofCall, 
+                PropertyType: raw.PropertyType, 
+                PropertyCategory: raw.PropertyCategory, 
+                Ward: raw.Ward, 
+                Borough: raw.Borough, 
+                Street: raw.Street, 
+                PostcodeDistrict: raw.PostcodeDistrict,
+                Latitude: this.getNullSafeString(raw.Latitude),
+                Longitude: this.getNullSafeString(raw.Longitude)
+            } as Incident;
+        });
 
         return incidents;
     }
