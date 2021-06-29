@@ -9,7 +9,7 @@ The dataset can be found [here](https://data.london.gov.uk/dataset/animal-rescue
 ## Todo
 
 - [x] Basic map
-- [ ] Use of router with link to a credits doc and/or this readme 
+- [ ] Use of router with link to a credits doc and/or this readme
 - [ ] Detail view in side panel
 - [ ] Detail map within side panel
 - [ ] Search by Postcode
@@ -17,5 +17,11 @@ The dataset can be found [here](https://data.london.gov.uk/dataset/animal-rescue
 - [ ] Search by Easting/Northing
 - [ ] Search by ward
 - [ ] vscode task to split the terminal on startup 😱
+- [ ] Tests
 - [ ] Store data in mongoDB rather than read from file each time
+- [ ] Investigate additional LFB/related datasets
+
+## Refactors
+
+- [ ] Refactor app -> info panel passing through of incidentNumber into a reducer in app? 
 - [ ] Convert from Nest to Apollo? 
