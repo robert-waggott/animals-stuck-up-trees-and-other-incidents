@@ -16,5 +16,6 @@ The dataset can be found [here](https://data.london.gov.uk/dataset/animal-rescue
 - [ ] Search by Lat/Lng
 - [ ] Search by Easting/Northing
 - [ ] Search by ward
+- [ ] vscode task to split the terminal on startup 😱
 - [ ] Store data in mongoDB rather than read from file each time
 - [ ] Convert from Nest to Apollo? 
