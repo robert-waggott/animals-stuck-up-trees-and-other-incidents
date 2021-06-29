@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import { Map, MapProps } from "./components/map";
 import { InfoPanel, InfoPanelProps } from "./components/info-panel";
+import { SearchForm, SearchFormProps } from "./components/search-form";
 import { IncidentsService, IncidentsFeatureCollection } from './services/incidents-service';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -21,12 +22,16 @@ function App() {
     }, []);
 
     const onPointClicked = (id: string) => {
-        console.log(id);
         setSelectedIncidentNumber(id);
+    };
+
+    const onSearchTermEntered = (term: string) => {
+        console.log(term);
     };
 
     return (
         <div className="App">
+            <SearchForm onSearchTermEntered={onSearchTermEntered} />
             <Map incidentsGeoJson={incidents} onPointClicked={onPointClicked} />
             <InfoPanel incidentNumber={selectedIncidentNumber} />
         </div>

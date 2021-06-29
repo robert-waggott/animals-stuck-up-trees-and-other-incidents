@@ -10,7 +10,7 @@ The dataset can be found [here](https://data.london.gov.uk/dataset/animal-rescue
 
 - [x] Basic map
 - [ ] Use of router with link to a credits doc and/or this readme
-- [ ] Detail view in side panel
+- [x] Detail view in side panel
 - [ ] Detail map within side panel
 - [ ] Search by Postcode
 - [ ] Search by Lat/Lng
