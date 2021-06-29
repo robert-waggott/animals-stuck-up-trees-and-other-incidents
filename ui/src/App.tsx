@@ -1,12 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
 import { Map, MapProps } from "./components/map";
+import { InfoPanel, InfoPanelProps } from "./components/info-panel";
 import { IncidentsService, IncidentsFeatureCollection } from './services/incidents-service';
 import './App.css';
 
 function App() {
     const [incidents, setIncidents] = React.useState<IncidentsFeatureCollection>();
-    const [selectedIncidentNumber, setSelectedIncidentNumber] = React.useState<number | null>(null);
+    const [selectedIncidentNumber, setSelectedIncidentNumber] = React.useState<string | null>(null);
     
     React.useEffect(() => {
         async function fetchData() {
@@ -18,7 +19,7 @@ function App() {
         fetchData();
     }, []);
 
-    const onPointClicked = (id: number) => {
+    const onPointClicked = (id: string) => {
         console.log(id);
         setSelectedIncidentNumber(id);
     };
@@ -26,6 +27,7 @@ function App() {
     return (
         <div className="App">
             <Map incidentsGeoJson={incidents} onPointClicked={onPointClicked} />
+            <InfoPanel incidentNumber={selectedIncidentNumber} />
         </div>
     );
 }

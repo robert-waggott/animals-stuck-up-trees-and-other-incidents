@@ -5,10 +5,11 @@ import { Incident } from 'src/interfaces/incident.interface';
 import { Feature, FeatureCollection, Point } from 'geojson';
 import * as parse from "csv-parse/lib/sync";
 import { BaseService } from "./base.service";
+import { LatLng } from "src/dtos/latlng";
 
 @Injectable()
 export class IncidentsService extends BaseService {
-    getIncident(id: number): Incident | undefined {
+    getIncident(id: string): Incident | undefined {
         return this.getIncidents().find(incident => incident.IncidentNumber === id);
     }
 
@@ -37,7 +38,7 @@ export class IncidentsService extends BaseService {
     }
 
     getIncidentsAsGeoJson(): FeatureCollection<Point> {
-        const incidents = this.getIncidents().filter(incident => incident.Latitude !== null && incident.Longitude !== null);
+        const incidents = this.getIncidents().filter(incident => new LatLng(incident.Latitude, incident.Longitude).isValid);
 
         return { 
             type: "FeatureCollection",

@@ -7,7 +7,7 @@ export class IncidentController {
     constructor(private readonly incidentsService: IncidentsService) { }
 
     @Get(":id")
-    getIncident(@Param("id") id:number): Incident | undefined {
+    getIncident(@Param("id") id:string): Incident | undefined {
         return this.incidentsService.getIncident(id);
     }
 }

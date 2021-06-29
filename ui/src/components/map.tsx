@@ -4,7 +4,7 @@ import { IncidentsFeatureCollection } from "../services/incidents-service";
 
 export interface MapProps {
     incidentsGeoJson?: IncidentsFeatureCollection;
-    onPointClicked: (id: number) => unknown;
+    onPointClicked: (id: string) => unknown;
 }
 
 export const Map = (props: MapProps) => {
@@ -23,6 +23,13 @@ export const Map = (props: MapProps) => {
             if (!incidentsGeoJson) {
                 return;
             }
+
+            const latLngs = incidentsGeoJson.features.map(feature => feature.geometry.coordinates as [number, number])
+            const bounds = new maplibregl.LngLatBounds();
+
+            latLngs.forEach(latLng => bounds.extend(latLng));
+            
+            map.fitBounds(bounds, { padding: 30 });
 
             // Add a geojson point source.
             // Heatmap layers also work with a vector tile source.

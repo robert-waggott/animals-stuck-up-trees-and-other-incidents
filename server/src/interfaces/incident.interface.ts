@@ -1,7 +1,7 @@
 import moment from "moment";
 
 export interface Incident {
-    IncidentNumber: number;
+    IncidentNumber: string;
     DateTime: moment.MomentInput;
     Type: string;
     PumpCount: number;
