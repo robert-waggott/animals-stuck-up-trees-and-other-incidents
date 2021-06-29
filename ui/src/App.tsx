@@ -3,7 +3,8 @@ import logo from './logo.svg';
 import { Map, MapProps } from "./components/map";
 import { InfoPanel, InfoPanelProps } from "./components/info-panel";
 import { IncidentsService, IncidentsFeatureCollection } from './services/incidents-service';
-import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
 function App() {
     const [incidents, setIncidents] = React.useState<IncidentsFeatureCollection>();
