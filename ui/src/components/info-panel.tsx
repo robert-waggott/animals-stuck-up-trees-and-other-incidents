@@ -41,6 +41,7 @@ export const InfoPanel = (props: InfoPanelProps) => {
         right: 0, 
         width: "500px", 
         height: "100%", 
+        display: props.incidentNumber ? "block" : "none",
         opacity: props.incidentNumber ? 1 : 0, 
         transition: "all 1s ease-in",
         zIndex: 999, 

@@ -1,10 +1,5 @@
 import React from "react";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    NavLink
-} from "react-router-dom";
+import { BrowserRouter as Router, NavLink } from "react-router-dom";
 import styles from "./navigation.module.scss";
 
 export const Navigation = () => {
@@ -12,10 +7,10 @@ export const Navigation = () => {
         <nav className={styles.nav}>
             <ul>
                 <li>
-                    <NavLink to="/" activeClassName="selected">Map</NavLink>
+                    <NavLink to="/" activeClassName={styles.selected}>Map</NavLink>
                 </li>
                 <li>
-                    <NavLink to="/about" activeClassName="selected">About</NavLink>
+                    <NavLink to="/about" activeClassName={styles.selected}>About</NavLink>
                 </li>
             </ul>
         </nav>
