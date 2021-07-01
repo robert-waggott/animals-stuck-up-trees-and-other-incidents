@@ -3,6 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { IncidentsService } from "../services/incidents-service";
 import { FaExternalLinkAlt, FaRegMehRollingEyes } from "react-icons/fa";
 import { IncidentDetailReducer, IncidentDetailReducerAction } from "../reducers/incident-detail-reducer";
+import { DetailMap } from "./detail-map";
 import styles from "./info-panel.module.scss";
 
 export interface InfoPanelProps {
@@ -60,6 +61,11 @@ export const InfoPanel = (props: InfoPanelProps) => {
         );
     }
 
+    const latLng = { 
+        lat: incident.incident?.Latitude, 
+        lng: incident.incident?.Longitude 
+    };
+
     return (
         <>
             <div className={styles.infoPanel} style={style}>
@@ -109,9 +115,9 @@ export const InfoPanel = (props: InfoPanelProps) => {
                             </a>
                         </Col>
                     </Row>                     
-                    <Row>
+                    <Row className={styles.mapContainer}>
                         <Col>
-
+                            <DetailMap latLng={latLng} />
                         </Col>
                     </Row>                                                        
                 </Container>                

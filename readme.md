@@ -24,5 +24,6 @@ The dataset can be found [here](https://data.london.gov.uk/dataset/animal-rescue
 ## Refactors
 
 - [x] Refactor app -> info panel passing through of incidentNumber into a reducer in app? 
-- [ ] Refactor sidebar to use scss module 
+- [x] Refactor sidebar to use scss module 
+- [x] Emoji as favicon 
 - [ ] Convert from Nest to Apollo? 
