@@ -1,0 +1,9 @@
+{
+    "extends": [
+      "react-app",
+      "shared-config"
+    ],
+    "rules": {
+      "quotes": "double"
+    }
+}
