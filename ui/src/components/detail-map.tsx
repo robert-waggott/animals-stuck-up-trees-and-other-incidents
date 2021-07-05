@@ -1,9 +1,10 @@
 import React, { MutableRefObject } from "react";
 import maplibregl, { LngLatLike } from "maplibre-gl";
+import { FeatureCollection } from "geojson";
 
 export interface DetailMapProps {
-    latLng: { 
-        lat?: number | null, 
+    latLng: {
+        lat?: number | null,
         lng?: number | null
     };
 }
@@ -20,7 +21,43 @@ export const DetailMap = (props: DetailMapProps) => {
                 zoom: 16
             });
 
-            // todo: add marker. 
+            map.on("load", () => {
+                map.addSource('incidents', {
+                    'type': 'geojson',
+                    'data': {
+                        type: 'FeatureCollection',
+                        features: [{
+                            type: 'Feature',
+                            geometry: {
+                                type: 'Point',
+                                coordinates: [props.latLng.lng!, props.latLng.lat!]
+                            },
+                            properties: {}
+                        }]
+                    }
+                });
+
+                map.addLayer({
+                    'id': 'incidents-point',
+                    'type': 'circle',
+                    'source': 'incidents',
+                    'paint': {
+                        'circle-radius': 10,
+                        'circle-color': 'rgb(178,24,43)',
+                        'circle-stroke-color': 'white',
+                        'circle-stroke-width': 1,
+                        'circle-opacity': [
+                            'interpolate',
+                            ['linear'],
+                            ['zoom'],
+                            13,
+                            0,
+                            14,
+                            1
+                        ]
+                    }
+                });
+            });
         }
     }, [props.latLng]);
 

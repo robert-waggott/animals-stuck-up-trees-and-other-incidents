@@ -8,22 +8,24 @@ The dataset can be found [here](https://data.london.gov.uk/dataset/animal-rescue
 
 ## Todo
 
-- [x] Basic map
-- [x] Use of router with link to a credits doc and/or this readme
-- [x] Detail view in side panel
-- [ ] Detail map within side panel
+- [x] Detail map within side panel
 - [ ] Search by Postcode
 - [ ] Search by Lat/Lng
 - [ ] Search by Easting/Northing
 - [ ] Search by ward
+- [ ] Ability to toggle ward/post code boundaries on/off 
+- [ ] Ability to add events to the map
 - [ ] vscode task to split the terminal on startup 😱
 - [ ] Tests
 - [ ] Store data in mongoDB rather than read from file each time
+- [x] Basic map
+- [x] Use of router with link to a credits doc and/or this readme
+- [x] Detail view in side panel
 - [x] Investigate additional LFB/related datasets
 
 ## Refactors
 
+- [ ] Convert from Nest to Apollo? 
 - [x] Refactor app -> info panel passing through of incidentNumber into a reducer in app? 
 - [x] Refactor sidebar to use scss module 
 - [x] Emoji as favicon 
-- [ ] Convert from Nest to Apollo? 

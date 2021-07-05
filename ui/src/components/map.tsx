@@ -30,9 +30,7 @@ export const Map = (props: MapProps) => {
             latLngs.forEach(latLng => bounds.extend(latLng));
             
             map.fitBounds(bounds, { padding: 30 });
-
-            // Add a geojson point source.
-            // Heatmap layers also work with a vector tile source.
+            
             map.addSource('incidents', {
                 'type': 'geojson',
                 'data': incidentsGeoJson
