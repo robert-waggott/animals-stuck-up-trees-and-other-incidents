@@ -10,35 +10,35 @@ The dataset can be found [here](https://data.london.gov.uk/dataset/animal-rescue
 
 ### Server
 
-Create a config.env in the root of the ./server directory. It should look something like this:
+Create a config.env in the root of the `./server` directory. It should look something like this:
 
 ```
 PORT=3001
 GEOCODIOAPIKEY=ec5...
 ```
 
-- Port - The port to run the server on. Should default to 3001 as that's what the ui is currently expecting. 
+- Port - The port to run the server on. Should default to `3001` as that's what the ui is currently expecting. 
 - Geocodio API Key - Get a free API key [from here](https://www.geocod.io/). 
 
 ## Todo
 
-- [x] Detail map within side panel
-- [ ] Search by Postcode
-- [ ] Search by Lat/Lng
-- [ ] Search by Easting/Northing
-- [ ] Search by ward
+- [ ] Implement search
 - [ ] Ability to toggle ward/post code boundaries on/off 
 - [ ] Ability to add events to the map
 - [ ] vscode task to split the terminal on startup 😱
 - [ ] Tests
 - [ ] Store data in mongoDB rather than read from file each time
+- [ ] Choose a license and add in a license file
 - [x] Basic map
 - [x] Use of router with link to a credits doc and/or this readme
 - [x] Detail view in side panel
 - [x] Investigate additional LFB/related datasets
+- [x] Detail map within side panel
 
 ## Refactors
 
+- [ ] Remove hardcoded map tiler API key - replace with server env variable
+- [ ] Replace Geocodio with ESRI
 - [ ] Convert from Nest to Apollo? 
 - [x] Refactor app -> info panel passing through of incidentNumber into a reducer in app? 
 - [x] Refactor sidebar to use scss module 
