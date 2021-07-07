@@ -6,6 +6,20 @@ The data is an London Fire Brigade (LFB) dataset containing data of when and whe
 
 The dataset can be found [here](https://data.london.gov.uk/dataset/animal-rescue-incidents-attended-by-lfb). I originally found this dataset, and other equally interesting datasets from the [data is plural newsletter](https://www.data-is-plural.com/). The specific newsletter addition linking to this dataset can be found [here](https://www.data-is-plural.com/archive/2021-06-16-edition/). 
 
+## Environment variables
+
+### Server
+
+Create a config.env in the root of the ./server directory. It should look something like this:
+
+```
+PORT=3001
+GEOCODIOAPIKEY=ec5...
+```
+
+- Port - The port to run the server on. Should default to 3001 as that's what the ui is currently expecting. 
+- Geocodio API Key - Get a free API key [from here](https://www.geocod.io/). 
+
 ## Todo
 
 - [x] Detail map within side panel
