@@ -1,7 +1,8 @@
 import React from "react";
-import { Map as MapComponent, MapProps } from "../components/map";
-import { InfoPanel, InfoPanelProps } from "../components/info-panel";
-import { SearchForm, SearchFormProps } from "../components/search-form";
+import { Map as MapComponent } from "../components/map";
+import { InfoPanel } from "../components/info-panel";
+import { SearchForm } from "../components/search-form";
+import { SearchFormResults, SearchFormResultType } from "../components/search-form-results";
 import { IncidentsService, IncidentsFeatureCollection } from '../services/incidents-service';
 
 export const Map = () => {
@@ -29,6 +30,11 @@ export const Map = () => {
     return (
         <div className="App">
             <SearchForm onSearchTermEntered={onSearchTermEntered} />
+            <SearchFormResults results={[
+                { text: "Letchworth Garden City", type: SearchFormResultType.Town },
+                { text: "Common Road, Stotfold", type: SearchFormResultType.Address },
+                { text: "SG6 3SA", type: SearchFormResultType.Postcode }
+            ]} />
             <MapComponent incidentsGeoJson={incidents} onPointClicked={onPointClicked} />
             <InfoPanel incidentNumber={selectedIncidentNumber} />
         </div>
