@@ -4,10 +4,14 @@ import { InfoPanel } from "../components/info-panel";
 import { SearchForm } from "../components/search-form";
 import { SearchFormResults, SearchFormResultType } from "../components/search-form-results";
 import { IncidentsService, IncidentsFeatureCollection } from '../services/incidents-service';
+import { Config } from '../interfaces/config';
+
+export const ConfigContext = React.createContext<Config | null>(null);
 
 export const Map = () => {
     const [incidents, setIncidents] = React.useState<IncidentsFeatureCollection>();
     const [selectedIncidentNumber, setSelectedIncidentNumber] = React.useState<string | null>(null);
+    const [config, setConfig] = React.useState<Config | null>(null);
     
     React.useEffect(() => {
         async function fetchData() {
@@ -16,7 +20,12 @@ export const Map = () => {
             setIncidents(fetchedData);    
         };
 
+        async function fetchConfig() {                    
+            setConfig({ MapTilerAPIKey: "get_your_own_OpIi9ZULNHzrESv6T2vL" });    
+        };        
+
         fetchData();
+        fetchConfig();
     }, []);
 
     const onPointClicked = (id: string) => {
@@ -28,7 +37,7 @@ export const Map = () => {
     };
 
     return (
-        <div className="App">
+        <ConfigContext.Provider value={config}>
             <SearchForm onSearchTermEntered={onSearchTermEntered} />
             <SearchFormResults results={[
                 { text: "Letchworth Garden City", type: SearchFormResultType.Town },
@@ -37,6 +46,6 @@ export const Map = () => {
             ]} />
             <MapComponent incidentsGeoJson={incidents} onPointClicked={onPointClicked} />
             <InfoPanel incidentNumber={selectedIncidentNumber} />
-        </div>
+        </ConfigContext.Provider>
     );    
 };

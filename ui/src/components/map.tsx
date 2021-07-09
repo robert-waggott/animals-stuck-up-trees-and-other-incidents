@@ -1,6 +1,7 @@
 import React, { MutableRefObject } from "react";
 import maplibregl from "maplibre-gl";
 import { IncidentsFeatureCollection } from "../services/incidents-service";
+import { ConfigContext } from "../pages/map";
 
 export interface MapProps {
     incidentsGeoJson?: IncidentsFeatureCollection;
@@ -10,11 +11,12 @@ export interface MapProps {
 export const Map = (props: MapProps) => {
     const mapRef = React.useRef() as MutableRefObject<HTMLDivElement>;
     const incidentsGeoJson = props.incidentsGeoJson;
+    const config = React.useContext(ConfigContext);
 
     React.useEffect(() => {
         const map = new maplibregl.Map({
             container: mapRef.current,
-            style: 'https://api.maptiler.com/maps/streets/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL',
+            style: `https://api.maptiler.com/maps/streets/style.json?key=${config?.MapTilerAPIKey}`,
             center: [-1.631291, 52.482780],
             zoom: 4
         });

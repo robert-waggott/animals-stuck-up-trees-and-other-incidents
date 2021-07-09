@@ -1,6 +1,6 @@
 import React, { MutableRefObject } from "react";
-import maplibregl, { LngLatLike } from "maplibre-gl";
-import { FeatureCollection } from "geojson";
+import maplibregl from "maplibre-gl";
+import { ConfigContext } from "../pages/map";
 
 export interface DetailMapProps {
     latLng: {
@@ -11,12 +11,13 @@ export interface DetailMapProps {
 
 export const DetailMap = (props: DetailMapProps) => {
     const mapRef = React.useRef() as MutableRefObject<HTMLDivElement>;
+    const config = React.useContext(ConfigContext);
 
     React.useEffect(() => {
         if (props.latLng.lat && props.latLng.lng) {
             const map = new maplibregl.Map({
                 container: mapRef.current,
-                style: 'https://api.maptiler.com/maps/streets/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL',
+                style: `https://api.maptiler.com/maps/streets/style.json?key=${config?.MapTilerAPIKey}`,
                 center: [props.latLng.lng, props.latLng.lat],
                 zoom: 16
             });
