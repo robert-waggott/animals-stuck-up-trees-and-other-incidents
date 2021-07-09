@@ -37,6 +37,7 @@ GEOCODIOAPIKEY=ec5...
 
 ## Refactors
 
+- [ ] Replace fetch() with axios 
 - [ ] Remove hardcoded map tiler API key - replace with server env variable
 - [ ] Replace Geocodio with ESRI
 - [ ] Convert from Nest to Apollo? 
