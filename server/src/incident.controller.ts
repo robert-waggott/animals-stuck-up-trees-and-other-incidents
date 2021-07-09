@@ -1,13 +1,13 @@
-import { IncidentsService } from './services/incidents.service';
-import { Controller, Get, Param } from '@nestjs/common';
-import { Incident } from './interfaces/incident.interface';
+import { IncidentsService } from "./services/incidents.service";
+import { Controller, Get, Param } from "@nestjs/common";
+import { Incident } from "./interfaces/incident.interface";
 
 @Controller("Incident")
 export class IncidentController {
-    constructor(private readonly incidentsService: IncidentsService) { }
+    constructor(private readonly incidentsService: IncidentsService) {}
 
     @Get(":id")
-    getIncident(@Param("id") id:string): Incident | undefined {
+    getIncident(@Param("id") id: string): Incident | undefined {
         return this.incidentsService.getIncident(id);
     }
 }

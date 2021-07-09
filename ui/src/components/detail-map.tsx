@@ -47,15 +47,7 @@ export const DetailMap = (props: DetailMapProps) => {
                         'circle-color': 'rgb(178,24,43)',
                         'circle-stroke-color': 'white',
                         'circle-stroke-width': 1,
-                        'circle-opacity': [
-                            'interpolate',
-                            ['linear'],
-                            ['zoom'],
-                            13,
-                            0,
-                            14,
-                            1
-                        ]
+                        'circle-opacity': 1
                     }
                 });
             });

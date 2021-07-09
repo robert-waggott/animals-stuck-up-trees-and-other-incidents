@@ -1,10 +1,10 @@
-import { NestFactory } from '@nestjs/core';
+import { NestFactory } from "@nestjs/core";
 import * as dotenv from "dotenv";
 import { join } from "path";
-import { AppModule } from './app.module';
+import { AppModule } from "./app.module";
 
-dotenv.config({ 
-    path: join(__dirname, "..", "config.env") 
+dotenv.config({
+    path: join(__dirname, "..", "config.env")
 });
 
 async function bootstrap() {
