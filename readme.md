@@ -28,7 +28,7 @@ GEOCODIOAPIKEY=ec5...
 - [ ] vscode task to split the terminal on startup 😱
 - [ ] Tests
 - [ ] Store data in mongoDB rather than read from file each time
-- [ ] Choose a license and add in a license file
+- [x] Choose a license and add in a license file
 - [x] Basic map
 - [x] Use of router with link to a credits doc and/or this readme
 - [x] Detail view in side panel
