@@ -37,10 +37,10 @@ GEOCODIOAPIKEY=ec5...
 
 ## Refactors
 
-- [ ] Replace fetch() with axios 
 - [ ] Remove hardcoded map tiler API key - replace with server env variable
 - [ ] Replace Geocodio with ESRI
 - [ ] Convert from Nest to Apollo? 
+- [x] Replace fetch() with axios 
 - [x] Refactor app -> info panel passing through of incidentNumber into a reducer in app? 
 - [x] Refactor sidebar to use scss module 
 - [x] Emoji as favicon 
