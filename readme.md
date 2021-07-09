@@ -15,10 +15,12 @@ Create a config.env in the root of the `./server` directory. It should look some
 ```
 PORT=3001
 GEOCODIOAPIKEY=ec5...
+MAPTILERAPIKEY=nki...
 ```
 
 - Port - The port to run the server on. Should default to `3001` as that's what the ui is currently expecting. 
 - Geocodio API Key - Get a free API key [from here](https://www.geocod.io/). 
+- MapTiler API Key - Sign up for a [free account here](https://cloud.maptiler.com/). 
 
 ## Todo
 
