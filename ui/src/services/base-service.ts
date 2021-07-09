@@ -1,5 +1,9 @@
+import axios from "axios";
+
 export abstract class BaseService {
     async get(url: string) {
-        return await fetch(url, { method: "GET", mode: "cors", credentials: "same-origin" });
+        const response = await axios.get(url);
+
+        return response.data;
     }
 }

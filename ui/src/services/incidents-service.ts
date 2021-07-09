@@ -6,16 +6,10 @@ export interface IncidentsFeatureCollection extends FeatureCollection<Point> {
 
 export class IncidentsService extends BaseService {
     async getIncident(incidentNumber: string) {
-        const response = await this.get(`http://localhost:3001/incident/${incidentNumber}`);
-        const incident = await response.json();
-
-        return incident;
+        return await this.get(`http://localhost:3001/incident/${incidentNumber}`);
     }
 
     async getIncidentsAsGeoJson(): Promise<IncidentsFeatureCollection> {
-        const response = await this.get("http://localhost:3001/incidentsmap");
-        const featureCollection = await response.json();
-
-        return featureCollection;
+        return await this.get("http://localhost:3001/incidentsmap");
     }
 }
