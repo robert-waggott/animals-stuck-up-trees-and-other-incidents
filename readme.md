@@ -37,7 +37,6 @@ MAPTILERAPIKEY=nki...
 
 ## Refactors
 
-- [ ] Replace Geocodio with ESRI
 - [ ] Store data in mongoDB rather than read from file each time
 - [x] Remove hardcoded map tiler API key - replace with server env variable
 - [x] Replace fetch() with axios
