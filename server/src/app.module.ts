@@ -1,3 +1,4 @@
+import { ConfigController } from "./config.controller";
 import { IncidentsMapController } from "./incidents-map.controller";
 import { IncidentsService } from "./services/incidents.service";
 import { Module } from "@nestjs/common";
@@ -13,7 +14,8 @@ import { IncidentController } from "./incident.controller";
         IncidentController,
         IncidentsController,
         IncidentsMapController,
+        ConfigController
     ],
-    providers: [AppService, IncidentsService],
+    providers: [AppService, IncidentsService]
 })
 export class AppModule {}
