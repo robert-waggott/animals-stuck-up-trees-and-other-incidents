@@ -5,6 +5,7 @@ import { SearchForm } from "../components/search-form";
 import { SearchFormResults, SearchFormResultType } from "../components/search-form-results";
 import { IncidentsService, IncidentsFeatureCollection } from '../services/incidents-service';
 import { Config } from '../interfaces/config';
+import { ConfigService } from "../services/config-service";
 
 export const ConfigContext = React.createContext<Config | null>(null);
 
@@ -20,8 +21,10 @@ export const Map = () => {
             setIncidents(fetchedData);    
         };
 
-        async function fetchConfig() {                    
-            setConfig({ MapTilerAPIKey: "get_your_own_OpIi9ZULNHzrESv6T2vL" });    
+        async function fetchConfig() {
+            const config = await new ConfigService().getConfig();
+
+            setConfig(config);    
         };        
 
         fetchData();

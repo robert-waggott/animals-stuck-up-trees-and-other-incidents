@@ -22,7 +22,7 @@ export const Map = (props: MapProps) => {
         });
 
         map.on('load', () => {
-            if (!incidentsGeoJson) {
+            if (!incidentsGeoJson || !config) {
                 return;
             }
 
@@ -130,7 +130,7 @@ export const Map = (props: MapProps) => {
         map.on('mouseleave', 'incidents-point', () => {
             map.getCanvas().style.cursor = '';
         });         
-    }, [incidentsGeoJson]);
+    }, [incidentsGeoJson, config]);
 
     return (
         <>
