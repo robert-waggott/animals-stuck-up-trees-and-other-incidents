@@ -2,45 +2,46 @@ import React, { MutableRefObject } from "react";
 import maplibregl from "maplibre-gl";
 import { IncidentsFeatureCollection } from "../services/incidents-service";
 import { ConfigContext } from "../pages/map";
+import { LatLng } from "../interfaces/latlng";
 
 export interface MapProps {
     incidentsGeoJson?: IncidentsFeatureCollection;
-    centerPoint?: { lat: number; lng: number };
+    centerPoint?: LatLng | null;
     onPointClicked: (id: string) => unknown;
 }
 
 export const Map = (props: MapProps) => {
-    const mapRef = React.useRef() as MutableRefObject<HTMLDivElement>;
+    const mapContainerRef = React.useRef() as MutableRefObject<HTMLDivElement>;
+    const mapRef = React.useRef() as MutableRefObject<maplibregl.Map>;
     const incidentsGeoJson = props.incidentsGeoJson;
     const config = React.useContext(ConfigContext);
-    let map: maplibregl.Map;
 
     React.useEffect(() => {
         if (!incidentsGeoJson || !config) {
             return;
         }
 
-        map = new maplibregl.Map({
-            container: mapRef.current,
+        mapRef.current = new maplibregl.Map({
+            container: mapContainerRef.current,
             style: `https://api.maptiler.com/maps/streets/style.json?key=${config?.MapTilerAPIKey}`,
             center: [-1.631291, 52.48278],
             zoom: 4
         });
 
-        map.on("load", () => {
+        mapRef.current.on("load", () => {
             const latLngs = incidentsGeoJson.features.map((feature) => feature.geometry.coordinates as [number, number]);
             const bounds = new maplibregl.LngLatBounds();
 
             latLngs.forEach((latLng) => bounds.extend(latLng));
 
-            map.fitBounds(bounds, { padding: 30 });
+            mapRef.current.fitBounds(bounds, { padding: 30 });
 
-            map.addSource("incidents", {
+            mapRef.current.addSource("incidents", {
                 type: "geojson",
                 data: incidentsGeoJson
             });
 
-            map.addLayer({
+            mapRef.current.addLayer({
                 id: "incidents-heat",
                 type: "heatmap",
                 source: "incidents",
@@ -69,7 +70,7 @@ export const Map = (props: MapProps) => {
                 }
             });
 
-            map.addLayer({
+            mapRef.current.addLayer({
                 id: "incidents-point",
                 type: "circle",
                 source: "incidents",
@@ -84,18 +85,18 @@ export const Map = (props: MapProps) => {
             });
         });
 
-        map.on("click", "incidents-point", (ev) => {
+        mapRef.current.on("click", "incidents-point", (ev) => {
             if (ev.features && ev.features.length > 0) {
                 props.onPointClicked(ev.features[0].properties!.id);
             }
         });
 
-        map.on("mouseenter", "incidents-point", () => {
-            map.getCanvas().style.cursor = "pointer";
+        mapRef.current.on("mouseenter", "incidents-point", () => {
+            mapRef.current.getCanvas().style.cursor = "pointer";
         });
 
-        map.on("mouseleave", "incidents-point", () => {
-            map.getCanvas().style.cursor = "";
+        mapRef.current.on("mouseleave", "incidents-point", () => {
+            mapRef.current.getCanvas().style.cursor = "";
         });
     }, [incidentsGeoJson, config]);
 
@@ -104,8 +105,12 @@ export const Map = (props: MapProps) => {
             return;
         }
 
-        console.log(props.centerPoint);
+        mapRef.current.flyTo({
+            center: props.centerPoint,
+            zoom: 16,
+            speed: 2
+        });
     }, [props.centerPoint]);
 
-    return <div ref={mapRef} id="map" style={{ position: "absolute", top: 0, bottom: 0, width: "100%" }} />;
+    return <div ref={mapContainerRef} id="map" style={{ position: "absolute", top: 0, bottom: 0, width: "100%" }} />;
 };

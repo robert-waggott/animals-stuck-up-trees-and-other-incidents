@@ -1,10 +1,11 @@
 import React from "react";
 import styles from "./search-form-results.module.scss";
 import { FaChevronRight } from "react-icons/fa";
-import { LocationSearchResponse } from "../interfaces/location-search-response";
+import { LocationSearchResponse, LocationSearchResult } from "../interfaces/location-search-response";
 
 export interface SearchFormResultsProps {
     locationSearchResponse: LocationSearchResponse | null;
+    onLocationClicked: (location: LocationSearchResult) => unknown;
 }
 
 export const SearchFormResults = (props: SearchFormResultsProps) => {
@@ -16,7 +17,7 @@ export const SearchFormResults = (props: SearchFormResultsProps) => {
         <div className={styles.searchFormResults}>
             {props.locationSearchResponse.results.map((result, index) => {
                 return (
-                    <div key={index} className="">
+                    <div key={index} className="" onClick={() => props.onLocationClicked(result)}>
                         <p>{result.name}</p>
                         <span>{result.description}</span>
                         <span>{result.type}</span>

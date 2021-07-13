@@ -7,7 +7,8 @@ import { IncidentsService, IncidentsFeatureCollection } from "../services/incide
 import { Config } from "../interfaces/config";
 import { ConfigService } from "../services/config-service";
 import { LocationSearchService } from "../services/location-search-service";
-import { LocationSearchResponse } from "../interfaces/location-search-response";
+import { LocationSearchResponse, LocationSearchResult } from "../interfaces/location-search-response";
+import { LatLng } from "../interfaces/latlng";
 
 export const ConfigContext = React.createContext<Config | null>(null);
 
@@ -16,6 +17,7 @@ export const Map = () => {
     const [selectedIncidentNumber, setSelectedIncidentNumber] = React.useState<string | null>(null);
     const [config, setConfig] = React.useState<Config | null>(null);
     const [locationSearchResponse, setLocationSearchResponse] = React.useState<LocationSearchResponse | null>(null);
+    const [centerPoint, setCenterPoint] = React.useState<LatLng | null>(null);
 
     React.useEffect(() => {
         async function fetchData() {
@@ -53,11 +55,15 @@ export const Map = () => {
         performSearch();
     };
 
+    const onSearchResultLocationClicked = (result: LocationSearchResult) => {
+        setCenterPoint(result.center);
+    };
+
     return (
         <ConfigContext.Provider value={config}>
             <SearchForm onSearchTermEntered={onSearchTermEntered} />
-            <SearchFormResults locationSearchResponse={locationSearchResponse} />
-            <MapComponent incidentsGeoJson={incidents} onPointClicked={onPointClicked} />
+            <SearchFormResults locationSearchResponse={locationSearchResponse} onLocationClicked={onSearchResultLocationClicked} />
+            <MapComponent incidentsGeoJson={incidents} centerPoint={centerPoint} onPointClicked={onPointClicked} />
             <InfoPanel incidentNumber={selectedIncidentNumber} />
         </ConfigContext.Provider>
     );
