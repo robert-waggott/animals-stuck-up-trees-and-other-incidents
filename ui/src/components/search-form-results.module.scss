@@ -1,3 +1,10 @@
+.attribution {
+    span {
+        font-size: 10px !important;
+        font-style: italic;
+    }
+}
+
 .searchFormResults {
     position: absolute;
     top: 80px;
@@ -19,6 +26,7 @@
         }
 
         span {
+            display: block;
             font-size: 12px;
             font-style: italic;
         }
@@ -26,7 +34,7 @@
         svg {
             position: absolute;
             right: 10px;
-            top: 20px;
+            top: 25px;
         }
     }
 }

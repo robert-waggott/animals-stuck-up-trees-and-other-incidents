@@ -8,14 +8,14 @@ export interface SearchFormProps {
 
 export const SearchForm = (props: SearchFormProps) => {
     const [searchTerm, setSearchTerm] = React.useState<string>("");
-    
+
     return (
         <>
             <div className={styles.searchForm}>
-                <input type="text" placeholder="Search term" value={searchTerm} />  
+                <input type="text" placeholder="Search term" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
                 <button type="button" onClick={() => props.onSearchTermEntered(searchTerm)}>
                     <FaSearch />
-                </button>                 
+                </button>
             </div>
         </>
     );

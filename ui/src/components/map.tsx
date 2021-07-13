@@ -5,6 +5,7 @@ import { ConfigContext } from "../pages/map";
 
 export interface MapProps {
     incidentsGeoJson?: IncidentsFeatureCollection;
+    centerPoint?: { lat: number; lng: number };
     onPointClicked: (id: string) => unknown;
 }
 
@@ -12,109 +13,75 @@ export const Map = (props: MapProps) => {
     const mapRef = React.useRef() as MutableRefObject<HTMLDivElement>;
     const incidentsGeoJson = props.incidentsGeoJson;
     const config = React.useContext(ConfigContext);
+    let map: maplibregl.Map;
 
     React.useEffect(() => {
-        const map = new maplibregl.Map({
+        if (!incidentsGeoJson || !config) {
+            return;
+        }
+
+        map = new maplibregl.Map({
             container: mapRef.current,
             style: `https://api.maptiler.com/maps/streets/style.json?key=${config?.MapTilerAPIKey}`,
-            center: [-1.631291, 52.482780],
+            center: [-1.631291, 52.48278],
             zoom: 4
         });
 
-        map.on('load', () => {
-            if (!incidentsGeoJson || !config) {
-                return;
-            }
-
-            const latLngs = incidentsGeoJson.features.map(feature => feature.geometry.coordinates as [number, number])
+        map.on("load", () => {
+            const latLngs = incidentsGeoJson.features.map((feature) => feature.geometry.coordinates as [number, number]);
             const bounds = new maplibregl.LngLatBounds();
 
-            latLngs.forEach(latLng => bounds.extend(latLng));
-            
+            latLngs.forEach((latLng) => bounds.extend(latLng));
+
             map.fitBounds(bounds, { padding: 30 });
-            
-            map.addSource('incidents', {
-                'type': 'geojson',
-                'data': incidentsGeoJson
+
+            map.addSource("incidents", {
+                type: "geojson",
+                data: incidentsGeoJson
             });
 
-            map.addLayer(
-                {
-                    'id': 'incidents-heat',
-                    'type': 'heatmap',
-                    'source': 'incidents',
-                    'maxzoom': 14,
-                    'paint': {
-                        'heatmap-intensity': [
-                            'interpolate',
-                            ['linear'],
-                            ['zoom'],
-                            0,
-                            1,
-                            14,
-                            3
-                        ],
-                        'heatmap-color': [
-                            'interpolate',
-                            ['linear'],
-                            ['heatmap-density'],
-                            0,
-                            'rgba(33,102,172,0)',
-                            0.2,
-                            'rgb(103,169,207)',
-                            0.4,
-                            'rgb(209,229,240)',
-                            0.6,
-                            'rgb(253,219,199)',
-                            0.8,
-                            'rgb(239,138,98)',
-                            1,
-                            'rgb(178,24,43)'
-                        ],
-                        'heatmap-radius': [
-                            'interpolate',
-                            ['linear'],
-                            ['zoom'],
-                            0,
-                            2,
-                            14,
-                            20
-                        ],
-                        'heatmap-opacity': [
-                            'interpolate',
-                            ['linear'],
-                            ['zoom'],
-                            13,
-                            1,
-                            14,
-                            0
-                        ]
-                    }
-                });
+            map.addLayer({
+                id: "incidents-heat",
+                type: "heatmap",
+                source: "incidents",
+                maxzoom: 14,
+                paint: {
+                    "heatmap-intensity": ["interpolate", ["linear"], ["zoom"], 0, 1, 14, 3],
+                    "heatmap-color": [
+                        "interpolate",
+                        ["linear"],
+                        ["heatmap-density"],
+                        0,
+                        "rgba(33,102,172,0)",
+                        0.2,
+                        "rgb(103,169,207)",
+                        0.4,
+                        "rgb(209,229,240)",
+                        0.6,
+                        "rgb(253,219,199)",
+                        0.8,
+                        "rgb(239,138,98)",
+                        1,
+                        "rgb(178,24,43)"
+                    ],
+                    "heatmap-radius": ["interpolate", ["linear"], ["zoom"], 0, 2, 14, 20],
+                    "heatmap-opacity": ["interpolate", ["linear"], ["zoom"], 13, 1, 14, 0]
+                }
+            });
 
-
-            map.addLayer(
-                {
-                    'id': 'incidents-point',
-                    'type': 'circle',
-                    'source': 'incidents',
-                    'minzoom': 13,
-                    'paint': {
-                        'circle-radius': 10,
-                        'circle-color': 'rgb(178,24,43)',
-                        'circle-stroke-color': 'white',
-                        'circle-stroke-width': 1,
-                        'circle-opacity': [
-                            'interpolate',
-                            ['linear'],
-                            ['zoom'],
-                            13,
-                            0,
-                            14,
-                            1
-                        ]
-                    }
-                });
+            map.addLayer({
+                id: "incidents-point",
+                type: "circle",
+                source: "incidents",
+                minzoom: 13,
+                paint: {
+                    "circle-radius": 10,
+                    "circle-color": "rgb(178,24,43)",
+                    "circle-stroke-color": "white",
+                    "circle-stroke-width": 1,
+                    "circle-opacity": ["interpolate", ["linear"], ["zoom"], 13, 0, 14, 1]
+                }
+            });
         });
 
         map.on("click", "incidents-point", (ev) => {
@@ -123,18 +90,22 @@ export const Map = (props: MapProps) => {
             }
         });
 
-        map.on('mouseenter', 'incidents-point', () => {
-            map.getCanvas().style.cursor = 'pointer';
+        map.on("mouseenter", "incidents-point", () => {
+            map.getCanvas().style.cursor = "pointer";
         });
-          
-        map.on('mouseleave', 'incidents-point', () => {
-            map.getCanvas().style.cursor = '';
-        });         
+
+        map.on("mouseleave", "incidents-point", () => {
+            map.getCanvas().style.cursor = "";
+        });
     }, [incidentsGeoJson, config]);
 
-    return (
-        <>
-            <div ref={mapRef} id="map" style={{ position: "absolute", top: 0, bottom: 0, width: "100%" }} />
-        </>
-    );
+    React.useEffect(() => {
+        if (!props.centerPoint) {
+            return;
+        }
+
+        console.log(props.centerPoint);
+    }, [props.centerPoint]);
+
+    return <div ref={mapRef} id="map" style={{ position: "absolute", top: 0, bottom: 0, width: "100%" }} />;
 };
