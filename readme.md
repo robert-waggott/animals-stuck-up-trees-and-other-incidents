@@ -25,9 +25,6 @@ MAPTILERAPIKEY=nki...
 ## Todo
 
 - [ ] Implement search
-- [ ] Ability to toggle ward/post code boundaries on/off
-- [ ] Ability to add events to the map
-- [ ] Tests
 - [x] Choose a license and add in a license file
 - [x] Basic map
 - [x] Use of router with link to a credits doc and/or this readme
@@ -37,7 +34,6 @@ MAPTILERAPIKEY=nki...
 
 ## Refactors
 
-- [ ] Store data in mongoDB rather than read from file each time
 - [x] Remove hardcoded map tiler API key - replace with server env variable
 - [x] Replace fetch() with axios
 - [x] Refactor app -> info panel passing through of incidentNumber into a reducer in app?
