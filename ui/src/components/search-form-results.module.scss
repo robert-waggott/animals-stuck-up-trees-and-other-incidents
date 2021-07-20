@@ -34,7 +34,7 @@
         svg {
             position: absolute;
             right: 10px;
-            top: 25px;
+            top: calc(50% - 10px);
         }
     }
 }
