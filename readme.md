@@ -24,7 +24,8 @@ MAPTILERAPIKEY=nki...
 
 ## Todo
 
-- [ ] Implement search
+- [ ] Static maps within search results
+- [x] Implement search
 - [x] Choose a license and add in a license file
 - [x] Basic map
 - [x] Use of router with link to a credits doc and/or this readme
