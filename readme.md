@@ -24,7 +24,7 @@ MAPTILERAPIKEY=nki...
 
 ## Todo
 
-- [ ] Static maps within search results
+- [x] Static maps within search results
 - [x] Implement search
 - [x] Choose a license and add in a license file
 - [x] Basic map

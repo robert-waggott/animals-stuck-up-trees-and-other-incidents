@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./search-form-results.module.scss";
 import { FaChevronRight } from "react-icons/fa";
 import { LocationSearchResponse, LocationSearchResult } from "../interfaces/location-search-response";
+import { StaticMap } from "./static-map";
 
 export interface SearchFormResultsProps {
     locationSearchResponse: LocationSearchResponse | null;
@@ -17,10 +18,11 @@ export const SearchFormResults = (props: SearchFormResultsProps) => {
         <div className={styles.searchFormResults}>
             {props.locationSearchResponse.results.map((result, index) => {
                 return (
-                    <div key={index} className="" onClick={() => props.onLocationClicked(result)}>
+                    <div key={index} onClick={() => props.onLocationClicked(result)}>
                         <p>{result.name}</p>
                         <span>{result.description}</span>
                         <span>{result.type}</span>
+                        <StaticMap mapboxAPIKey={props.locationSearchResponse!.mapboxAPIKey} latLng={result.center} />
                         <FaChevronRight />
                     </div>
                 );

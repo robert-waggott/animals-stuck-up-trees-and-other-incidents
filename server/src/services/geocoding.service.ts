@@ -7,7 +7,7 @@ import { LocationSearchResponse } from "src/interfaces/location-search-response.
 @Injectable()
 export class GeocodingService extends BaseService {
     async forwardGeocode(searchTerm: string): Promise<LocationSearchResponse> {
-        const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchTerm}.json?access_token=${process.env.MAPBOXAPIKEY}&country=gb&types=region,postcode,district,place,locality,neighborhood,address,poi`;
+        const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchTerm}.json?access_token=${process.env.MAPBOXAPIKEY}&country=gb&types=region,postcode,district,place,locality,neighborhood,address,poi&limit=3`;
 
         const response = await axios.get(url);
 
